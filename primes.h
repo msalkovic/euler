@@ -1,13 +1,21 @@
-#include<stdio.h>
-#include<string.h>
+#ifndef PRIMES_H
+#define PRIMES_H
 
-// ToDo: add include guards
+#include <stdio.h>
+#include <string.h>
 
+// Slightly modified Sieve of Erathostenes: if n is prime,
+// array[n] will be 0; if n is composite, array[n] will hold
+// n's largest prime factor.
+// Exceptions are 0 and 1, where array[0] == array[1] == 1;
 void sieve(int* array, int range) {
 	int i, next;
 	int n = 2;
 	
 	memset(array, 0, range * sizeof(int));
+
+	array[0] = 1;
+	array[1] = 1;
 	
 	while (1) {
 		for (i = n + n; i < range; i += n) array[i] = n;
@@ -58,4 +66,6 @@ void unique_factors(int* primes, int* factors, int number) {
 		}
 	}
 }
+
+#endif // PRIMES_H
 
