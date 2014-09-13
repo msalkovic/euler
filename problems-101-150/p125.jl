@@ -27,6 +27,7 @@ function square_sum(from, to)
     return acc
 end
 
+#=
 function is_solution(n::Int64)
     max_range = int(floor(sqrt(n) - 1.0))
     ns = range(1, max_range)
@@ -59,4 +60,19 @@ end
 
 # Note we skipped 5 = 2 ^ 2 + 1 ^ 2
 println(acc + 5)
+=#
+
+max_range = int(floor(sqrt(10 ^ 8 / 2)))
+solutions = Set{Int64}()
+
+for i in 1:max_range
+    for j in i+1:max_range
+        s = square_sum(i, j)
+        if s < 10 ^ 8 && fast_palin_check(s) && full_palin_check(s)
+            push!(solutions, s)
+        end
+    end
+end
+
+println(sum(solutions))
 
